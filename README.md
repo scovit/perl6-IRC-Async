@@ -44,13 +44,14 @@ https://github.com/scovit/perl6-IRC-Async
 # BUGS
 
 To report bugs or request features, please use
-https://github.com/zoffixznet/perl6-IRC-Async/issues
+https://github.com/scovit/perl6-IRC-Async/issues
 
 # AUTHOR
 
 Vittore F. Scolari (vittore.scolari@pasteur.fr)
 
-Makes heavily use of code and
+Makes heavily use of code and module of Zoffix
+https://github.com/zoffixznet/perl6-IRC-Client
 
 # LICENSE
 
