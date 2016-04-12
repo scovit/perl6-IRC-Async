@@ -3,7 +3,7 @@
     "name"         : "IRC::Async",
     "version"      : "0.9",
     "description"  : "Let's your software talk on IRC",
-    "depends"      : [ "IRC::Client", "readline" ],
+    "depends"      : [ "IRC::Client", "Readline" ],
     "test-depends" : [ "Test" ],
     "provides"     : {
         "IRC::Async"                 : "lib/IRC/Async.pm6",
