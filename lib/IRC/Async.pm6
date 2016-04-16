@@ -64,7 +64,6 @@ method write (Blob:D $msg) returns Promise {
 }
 
 method close {
-    self.print("\\quit");
     $!sock.close;
     $!supplier.done;
 }
