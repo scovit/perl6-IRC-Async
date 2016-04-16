@@ -31,7 +31,7 @@ IRC::Client module from Zoffix
                 if ($e eq "\\quit") {
                    await $chat.print("QUIT :My job is done");
                    $chat.close;
-		   exit;
+                   exit;
                 };
                 $chat.privmsg($channel, $e);
              }
