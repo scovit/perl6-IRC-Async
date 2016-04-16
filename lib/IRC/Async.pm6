@@ -24,13 +24,8 @@ method connect returns Promise {
 	    {
 		$!sock = .result;
 		$!supplier = Supplier.new;
-		
-		$.ssay("PASS $!password\n") if $!password.defined;
-		$.ssay("NICK $!nick\n");
-		$.ssay("USER $!username $!username $!host :$!userreal\n");
-		$.ssay("JOIN {@!channels[]}\n");
 
-		$!sock.Supply(:bin).tap(
+		$!sock.Supply(:bin).act(
 		    -> $buf is copy {
 			my $str      = try $buf.decode: 'utf8';
 			$str or $str = $buf.decode: 'latin-1';
@@ -41,6 +36,14 @@ method connect returns Promise {
 			    $!supplier.emit($e);
 			}
 		    });
+
+                my @connect-messages;
+                push @connect-messages, $.print("PASS $!password\n") if $!password.defined;
+                push @connect-messages, $.print("NICK $!nick\n");
+                push @connect-messages, $.print("USER $!username $!username $!host :$!userreal\n");
+                push @connect-messages, $.print("JOIN {@!channels[]}\n");
+                await Promise.allof(@connect-messages);
+
 	    });
 	self;
     }
@@ -50,15 +53,23 @@ method Supply returns Supply {
     $!supplier.Supply;
 }
 
-method ssay (Str:D $msg) {
+method print (Str:D $msg) returns Promise {
     $!debug and $msg.put;
     $!sock.print("$msg\n");
-    self;
 }
 
-method privmsg (Str $who, Str $what) {
-    my $msg = "PRIVMSG $who :$what\n";
+method write (Blob:D $msg) returns Promise {
     $!debug and $msg.put;
-    $!sock.print($msg);
-    self;
+    $!sock.write("$msg\n");
+}
+
+method close {
+    self.print("\\quit");
+    $!sock.close;
+    $!supplier.done;
+}
+
+method privmsg (Str $who, Str $what) returns Promise {
+    my $msg = "PRIVMSG $who :$what\n";
+    self.print($msg);
 }
