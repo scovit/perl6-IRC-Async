@@ -22,7 +22,11 @@ await $a.connect.then(
 		say "{$e<who><nick>}: {$e<params>[1]}";
 	    }
 	    whenever $stdinput -> $e {
-		$e eq "\\quit" && exit;
+                if ($e eq "\\quit") {
+                   await $chat.print("QUIT :My job is done");
+                   $chat.close;
+                   exit;
+                };
 		$chat.privmsg($channel, $e);
 	    }
 	}
