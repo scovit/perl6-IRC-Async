@@ -25,6 +25,10 @@ method connect returns Promise {
 		$!sock = .result;
 		$!supplier = Supplier.new;
 
+		$!supplier.Supply.grep({ $_ ~~ :command("PING") }).tap(
+		    -> $e { $.print("PONG {$!nick} $e<params>[0]");
+		    });
+
 		$!sock.Supply(:bin).act(
 		    -> $buf is copy {
 			my $str      = try $buf.decode: 'utf8';
