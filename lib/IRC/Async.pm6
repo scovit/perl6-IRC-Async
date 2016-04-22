@@ -58,12 +58,12 @@ method Supply returns Supply {
 }
 
 method print (Str:D $msg) returns Promise {
-    $!debug and $msg.put;
+    $!debug and $msg.print;
     $!sock.print("$msg");
 }
 
 method write (Blob:D $msg) returns Promise {
-    $!debug and $msg.gist.put;
+    $!debug and $msg.gist.print;
     $!sock.write("$msg");
 }
 
