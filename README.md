@@ -29,7 +29,7 @@ IRC::Client module from Zoffix
              }
              whenever $stdinput -> $e {
                 if ($e eq "\\quit") {
-                   await $chat.print("QUIT :My job is done");
+                   await $chat.print("QUIT :My job is done\n");
                    $chat.close;
                    exit;
                 };

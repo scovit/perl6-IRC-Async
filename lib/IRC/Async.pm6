@@ -26,7 +26,7 @@ method connect returns Promise {
 		$!supplier = Supplier.new;
 
 		$!supplier.Supply.grep({ $_ ~~ :command("PING") }).tap(
-		    -> $e { $.print("PONG {$!nick} $e<params>[0]");
+		    -> $e { $.print("PONG {$!nick} $e<params>[0]\n");
 		    });
 
 		$!sock.Supply(:bin).act(
@@ -59,12 +59,12 @@ method Supply returns Supply {
 
 method print (Str:D $msg) returns Promise {
     $!debug and $msg.put;
-    $!sock.print("$msg\n");
+    $!sock.print("$msg");
 }
 
 method write (Blob:D $msg) returns Promise {
     $!debug and $msg.gist.put;
-    $!sock.write("$msg\n");
+    $!sock.write("$msg");
 }
 
 method close {
@@ -74,5 +74,5 @@ method close {
 
 method privmsg (Str $who, Str $what) returns Promise {
     my $msg = "PRIVMSG $who :$what\n";
-    self.print($msg);
+    $.print($msg);
 }
