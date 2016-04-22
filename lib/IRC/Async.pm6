@@ -33,7 +33,7 @@ method connect returns Promise {
 		    -> $buf is copy {
 			my $str      = try $buf.decode: 'utf8';
 			$str or $str = $buf.decode: 'latin-1';
-			$!debug and "[server {DateTime.now}] {$str}".put;
+			$!debug and "[server {DateTime.now}] {$str}".print;
 			my $events = parse-irc $str;
 
 			for @$events -> $e {
