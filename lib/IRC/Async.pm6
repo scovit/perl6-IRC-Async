@@ -63,7 +63,7 @@ method print (Str:D $msg) returns Promise {
 }
 
 method write (Blob:D $msg) returns Promise {
-    $!debug and $msg.put;
+    $!debug and $msg.gist.put;
     $!sock.write("$msg\n");
 }
 
