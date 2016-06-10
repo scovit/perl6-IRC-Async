@@ -1,8 +1,10 @@
+[![Build Status](https://travis-ci.org/scovit/perl6-IRC-Async.svg)](https://travis-ci.org/scovit/perl6-IRC-Async)
 
 # NAME
 
-IRC::Async - Get an IRC client with little effort using the
-IRC::Client module from Zoffix
+IRC::Async - Get an IRC client up, and interact to it using a totally
+asynchronous API inspired from the Socket Async interface and no extra
+non-sense.
 
 # EXAMPLE
 
@@ -40,6 +42,91 @@ IRC::Client module from Zoffix
 
 ```
 
+# METHODS
+
+## new
+
+```perl6
+my $irc = IRC::Async.new;
+```
+
+```perl6
+# Defaults are shown
+my $irc = IRC::Async.new(
+   debug              => False,
+   host               => 'localhost',
+   password           => (Str),
+   port               => 6667,
+   nick               => 'EvilBOT',
+   username           => 'EvilBOT',
+   userreal           => 'Evil annoying BOT',
+   channels           => ['#perl6bot'],
+);
+```
+
+Creates and returns a new `IRC::Async` objects. All arguments are optional
+and self-explanatory.
+
+## connect
+
+```perl6
+   method connect returns Promise;
+```
+
+Takes no arguments. Attempts to connect to the IRC server, returning a
+Promise that will either be kept with a connected `IRC::Async` or
+broken if the connection cannot be made.
+
+## Supply
+
+```perl6
+   method Supply returns Supply 
+```
+
+Returns a `Supply` which can be tapped to obtain the message read from
+the connected `IRC::Async` as it arrives. By default the data will be
+emitted as an intuitive structured message as parsed by the
+`IRC::Parser` grammar installed as a dependency to this module.
+
+## print
+
+```perl6
+   method print (Str:D $msg) returns Promise
+```
+
+Attempt to send string `$msg` on the `IRC::Async` that will have been
+obtained indirectly via connect or listen, returning a Promise that
+will be kept with the number of bytes sent or broken if there was an
+error sending.
+
+## write
+
+```perl6
+   method write (Blob:D $msg) returns Promise
+```
+
+Attempt to send binary blob `$msg` on the `IRC::Async` that will have
+been obtained indirectly via connect or listen, returning a Promise
+that will be kept with the number of bytes sent or broken if there was
+an error sending.
+
+## close
+
+```perl6
+   method close
+```
+
+Close the connection to the server
+
+## privmsg
+
+```perl6
+   method privmsg (Str $who, Str $what) returns Promise
+```
+
+Calls the method print with the following format: `"PRIVMSG $who
+:$what\n"`.
+
 # REPOSITORY
 
 Fork this module on GitHub:
@@ -54,8 +141,9 @@ https://github.com/scovit/perl6-IRC-Async/issues
 
 Vittore F. Scolari (vittore.scolari@pasteur.fr)
 
-Makes heavily use of code and module of Zoffix
-https://github.com/zoffixznet/perl6-IRC-Client
+Thanks to Zoffix and it's
+https://github.com/zoffixznet/perl6-IRC-Client for the very clever IRC
+grammar.
 
 # LICENSE
 
