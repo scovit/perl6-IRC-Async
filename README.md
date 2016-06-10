@@ -6,6 +6,24 @@ IRC::Async - Get an IRC client up, and interact to it using a totally
 asynchronous API inspired from the Socket Async interface and no extra
 non-sense.
 
+# TABLE OF CONTENTS
+- [NAME](#name)
+- [TABLE OF CONTENTS](#table-of-contents)
+- [EXAMPLE](#example)
+- [DESCRIPTION](#description)
+- [METHODS](#methods)
+    - [`new`](#new)
+    - [`connect`](#connect)
+    - [`Supply`](#supply)
+    - [`print`](#print)
+    - [`write`](#write)
+    - [`close`](#close)
+    - [`privmsg`](#privmsg)
+- [REPOSITORY](#repository)
+- [BUGS](#bugs)
+- [AUTHOR](#author)
+- [LICENSE](#license)
+
 # EXAMPLE
 
 ```perl6
@@ -124,7 +142,7 @@ Close the connection to the server
    method privmsg (Str $who, Str $what) returns Promise
 ```
 
-Calls the method print with the following format: `"PRIVMSG $who
+Calls the method `print` with the following format: `"PRIVMSG $who
 :$what\n"`.
 
 # REPOSITORY
