@@ -2,9 +2,7 @@
 
 # NAME
 
-IRC::Async - Get an IRC client up, and interact to it using a totally
-asynchronous API inspired from the Socket Async interface and no extra
-non-sense.
+IRC::Async - Asynchronous IRC client
 
 # TABLE OF CONTENTS
 - [NAME](#name)
@@ -59,6 +57,11 @@ non-sense.
    });
 
 ```
+
+# DESCRIPTION
+
+Get an IRC client up, and interact to it using a totally
+asynchronous API inspired from the Socket Async interface.
 
 # METHODS
 
