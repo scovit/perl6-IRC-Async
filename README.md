@@ -116,7 +116,7 @@ emitted as an intuitive structured message as parsed by the
 ```
 
 Attempt to send string `$msg` on the `IRC::Async` that will have been
-obtained indirectly via connect or listen, returning a Promise that
+obtained indirectly via connect, returning a Promise that
 will be kept with the number of bytes sent or broken if there was an
 error sending. Pay attention: IRC command terminates
 with newline `"\n"` and print does not add it automagically, this
@@ -130,7 +130,7 @@ every IRC command.
 ```
 
 Attempt to send binary blob `$msg` on the `IRC::Async` that will have
-been obtained indirectly via connect or listen, returning a Promise
+been obtained indirectly via connect, returning a Promise
 that will be kept with the number of bytes sent or broken if there was
 an error sending.
 
