@@ -118,7 +118,10 @@ emitted as an intuitive structured message as parsed by the
 Attempt to send string `$msg` on the `IRC::Async` that will have been
 obtained indirectly via connect or listen, returning a Promise that
 will be kept with the number of bytes sent or broken if there was an
-error sending.
+error sending. Pay attention: IRC command terminates
+with newline `"\n"` and print does not add it automagically, this
+increase the flexibility; remember to add that character at the end of
+every IRC command.
 
 ## write
 
